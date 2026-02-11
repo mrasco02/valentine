@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Be My Valentine 💖</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: #ffdde1;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 100px;
+      font-size: 40px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 12px 24px;
+      margin: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #888;
+      color: white;
+      position: fixed;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Will you be my Valentine? 💘</h1>
+
+<button id="yesBtn" onclick="sayYes()">Yes ❤️</button>
+<button id="noBtn">No (only losers click this)</button>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+
+  const corners = [
+    { top: "10px", left: "10px" },                      // top-left
+    { top: "10px", right: "10px" },                     // top-right
+    { bottom: "10px", left: "10px" },                   // bottom-left
+    { bottom: "10px", right: "10px" }                   // bottom-right
+  ];
+
+  function moveToRandomCorner() {
+    const corner = corners[Math.floor(Math.random() * corners.length)];
+
+    // Reset all positions first
+    noBtn.style.top = "";
+    noBtn.style.bottom = "";
+    noBtn.style.left = "";
+    noBtn.style.right = "";
+
+    for (let key in corner) {
+      noBtn.style[key] = corner[key];
+    }
+  }
+
+  noBtn.addEventListener("mouseover", moveToRandomCorner);
+
+  function sayYes() {
+    document.body.innerHTML = `
+      <h1>I'd hope so since youre marrying me 💖</h1>
+    `;
+  }
+
+  // Start it in a random corner
+  moveToRandomCorner();
+</script>
+
+</body>
+</html>
