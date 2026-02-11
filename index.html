@@ -9,7 +9,6 @@
       background-color: #ffdde1;
       height: 100vh;
       margin: 0;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -18,12 +17,17 @@
 
     h1 {
       font-size: 40px;
+      margin-bottom: 40px;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 20px;
     }
 
     button {
       font-size: 20px;
       padding: 12px 24px;
-      margin: 20px;
       border: none;
       border-radius: 12px;
       cursor: pointer;
@@ -37,7 +41,6 @@
     #noBtn {
       background-color: #888;
       color: white;
-      position: fixed;
     }
 
     #typingText {
@@ -52,11 +55,14 @@
 
 <h1>Will you be my Valentine? 💘</h1>
 
-<button id="yesBtn" onclick="sayYes()">Yes ❤️</button>
-<button id="noBtn" onclick="cryingInDaClub()">No 😢</button>
+<div class="button-container">
+  <button id="yesBtn" onclick="sayYes()">Yes ❤️</button>
+  <button id="noBtn" onclick="cryingInDaClub()">No (only losers click this)</button>
+</div>
 
 <script>
   const noBtn = document.getElementById("noBtn");
+  let isFloating = false;
 
   const corners = [
     { top: "10px", left: "10px" },
@@ -68,6 +74,13 @@
   function moveToRandomCorner() {
     const corner = corners[Math.floor(Math.random() * corners.length)];
 
+    // On first hover, convert to floating button
+    if (!isFloating) {
+      noBtn.style.position = "fixed";
+      isFloating = true;
+    }
+
+    // Reset positions
     noBtn.style.top = "";
     noBtn.style.bottom = "";
     noBtn.style.left = "";
@@ -78,12 +91,13 @@
     }
   }
 
-  noBtn.addEventListener("mouseover", moveToRandomCorner);
+  noBtn.addEventListener("mouseenter", moveToRandomCorner);
 
   function sayYes() {
     document.body.innerHTML = `
-      <h1>I'd hope so since youre marrying me 💖</h1>    
-      `;
+      <h1>YAYYYY!!! 💖💖💖</h1>
+      <p>You just made me the happiest person alive 🥰</p>
+    `;
   }
 
   function cryingInDaClub() {
@@ -120,8 +134,6 @@
 
     type();
   }
-
-  moveToRandomCorner();
 </script>
 
 </body>
