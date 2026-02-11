@@ -53,7 +53,7 @@
 <h1>Will you be my Valentine? 💘</h1>
 
 <button id="yesBtn" onclick="sayYes()">Yes ❤️</button>
-<button id="noBtn">No 😢</button>
+<button id="noBtn" onclick="cryingInDaClub()">No 😢</button>
 
 <script>
   const noBtn = document.getElementById("noBtn");
@@ -86,9 +86,7 @@
       `;
   }
 
-  noBtn.addEventListener("click", sadEnding);
-
-  function sadEnding() {
+  function cryingInDaClub() {
     document.body.innerHTML = `
       <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyNDNxNGJmNGc4dzc3OWRxbnN5MWM2NXd5aXZsYWxlMTI5cGViendobyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/d2lcHJTG5Tscg/source.gif" width="300">
       <div id="typingText"></div>
