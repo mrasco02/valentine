@@ -10,10 +10,13 @@
       height: 100vh;
       margin: 0;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     h1 {
-      margin-top: 100px;
       font-size: 40px;
     }
 
@@ -36,6 +39,13 @@
       color: white;
       position: fixed;
     }
+
+    #typingText {
+      margin-top: 20px;
+      font-size: 22px;
+      font-style: italic;
+      min-height: 30px;
+    }
   </style>
 </head>
 <body>
@@ -43,22 +53,21 @@
 <h1>Will you be my Valentine? 💘</h1>
 
 <button id="yesBtn" onclick="sayYes()">Yes ❤️</button>
-<button id="noBtn">No (only losers click this)</button>
+<button id="noBtn">No 😢</button>
 
 <script>
   const noBtn = document.getElementById("noBtn");
 
   const corners = [
-    { top: "10px", left: "10px" },                      // top-left
-    { top: "10px", right: "10px" },                     // top-right
-    { bottom: "10px", left: "10px" },                   // bottom-left
-    { bottom: "10px", right: "10px" }                   // bottom-right
+    { top: "10px", left: "10px" },
+    { top: "10px", right: "10px" },
+    { bottom: "10px", left: "10px" },
+    { bottom: "10px", right: "10px" }
   ];
 
   function moveToRandomCorner() {
     const corner = corners[Math.floor(Math.random() * corners.length)];
 
-    // Reset all positions first
     noBtn.style.top = "";
     noBtn.style.bottom = "";
     noBtn.style.left = "";
@@ -73,11 +82,47 @@
 
   function sayYes() {
     document.body.innerHTML = `
-      <h1>I'd hope so since youre marrying me 💖</h1>
-    `;
+      <h1>I'd hope so since youre marrying me 💖</h1>    
+      `;
   }
 
-  // Start it in a random corner
+  noBtn.addEventListener("click", sadEnding);
+
+  function sadEnding() {
+    document.body.innerHTML = `
+      <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyNDNxNGJmNGc4dzc3OWRxbnN5MWM2NXd5aXZsYWxlMTI5cGViendobyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/d2lcHJTG5Tscg/source.gif" width="300">
+      <div id="typingText"></div>
+    `;
+
+    const messages = [
+      "okay....",
+      "that's fine....",
+      "I'll eat chocolate by myself then...",
+      "in bed.. sad"
+    ];
+
+    let messageIndex = 0;
+    let charIndex = 0;
+    const typingElement = document.getElementById("typingText");
+
+    function type() {
+      if (messageIndex < messages.length) {
+        if (charIndex < messages[messageIndex].length) {
+          typingElement.innerHTML += messages[messageIndex].charAt(charIndex);
+          charIndex++;
+          setTimeout(type, 60);
+        } else {
+          typingElement.innerHTML += "<br>";
+          messageIndex++;
+          charIndex = 0;
+          setTimeout(type, 800);
+        }
+      }
+    }
+
+    type();
+  }
+
   moveToRandomCorner();
 </script>
 
